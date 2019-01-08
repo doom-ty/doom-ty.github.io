@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Doom-TY的博客">
 <meta property="og:description" content="一、按照教程完成基础搭建博主使用的教程安装: hexo + github 搭建个人博客 二、安装所有文章模块1、在博客根目录（注意不是yilia根目录）执行以下命令(确保node版本大于6.2)：1npm i hexo-generator-json-content --save 2、在根目录_config.yml里添加配置：123456789101112131415161718jsonConten">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-08T06:21:33.253Z">
+<meta property="og:updated_time" content="2019-01-08T07:19:17.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客搭建日志">
 <meta name="twitter:description" content="一、按照教程完成基础搭建博主使用的教程安装: hexo + github 搭建个人博客 二、安装所有文章模块1、在博客根目录（注意不是yilia根目录）执行以下命令(确保node版本大于6.2)：1npm i hexo-generator-json-content --save 2、在根目录_config.yml里添加配置：123456789101112131415161718jsonConten">
@@ -60,14 +60,14 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/archives">所有文章</a></li>
 	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
     		
     			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">搜索</a>
     			
             
     			
@@ -140,7 +140,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/archives">所有文章</a></li>
 		        
 				</ul>
 			</nav>
@@ -394,7 +394,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">搜索</a></li>
       
         
       
@@ -421,10 +421,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">-hexo</a>
-              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
@@ -479,27 +475,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="https://www.bilibili.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>bilibili</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="http://www.baidu.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>百度</a>
             </li>
           
         </ul>
@@ -510,7 +490,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一位不知名的程序猿</div>
   	  	
     	</section>
     
