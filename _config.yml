@@ -102,4 +102,4 @@ jsonContent:
       permalink: false
       excerpt: false
       categories: false
-
+      tags: true
