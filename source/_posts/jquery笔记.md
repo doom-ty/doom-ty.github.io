@@ -37,8 +37,8 @@ $(window).resize(function () {          //当浏览器大小变化时
 
 #### 2、添加\移除class
 ```js
-$("#test“).addClass("testClass");
-$("#test“).removeClass("testClass");
+$("#test").addClass("testClass");
+$("#test").removeClass("testClass");
 ```
 
 <a id="mark3"></a>
