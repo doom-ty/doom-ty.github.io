@@ -19,7 +19,7 @@
     <link rel="alternative" href="/atom.xml" title="Doom-TY的博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="/imgs/favicon.ico">
+    <link rel="icon" href="/favicon.ico">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -152,6 +152,170 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-css笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/css笔记/">css笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/css笔记/" class="archive-article-date">
+  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、隐藏滚动条</a><br><a href="#mark2">2、div居中</a><br><a href="#mark3">3、元素动画(左右移动)</a><br><a href="#mark4">4、选中元素内指定子元素</a><br><a href="#mark5">5、颜色渐变</a></p>
+<p><a id="mark1"></a></p>
+<h4 id="1、隐藏滚动条"><a href="#1、隐藏滚动条" class="headerlink" title="1、隐藏滚动条"></a>1、隐藏滚动条</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.inner-container</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">    <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">    <span class="attribute">scrollbar-width</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* for Chrome 只针对谷歌浏览器*/</span></span><br><span class="line"><span class="selector-class">.inner-container</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark2"></a></p>
+<h4 id="2、div居中"><a href="#2、div居中" class="headerlink" title="2、div居中"></a>2、div居中</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#testDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark3"></a></p>
+<h4 id="3、元素动画-左右移动"><a href="#3、元素动画-左右移动" class="headerlink" title="3、元素动画(左右移动)"></a>3、元素动画(左右移动)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#enterLeft</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">-webkit-animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line">    <span class="attribute">animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark5"></a></p>
+<h4 id="4、选中元素内指定子元素"><a href="#4、选中元素内指定子元素" class="headerlink" title="4、选中元素内指定子元素"></a>4、选中元素内指定子元素</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 第一个li */</span> </span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span>&#123;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 最后一个li */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 第五个   */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(5)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark5"></a></p>
+<h4 id="5、颜色渐变"><a href="#5、颜色渐变" class="headerlink" title="5、颜色渐变"></a>5、颜色渐变</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 双色 */</span></span><br><span class="line"><span class="comment">/* 方向可以是 left、right、bottom left等等 */</span></span><br><span class="line"><span class="comment">/* 也可以指定角度 90deg */</span></span><br><span class="line"><span class="selector-id">#testDiv1</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">2.5px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(left, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv2</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, green, blue); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, green, blue); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, green, blue); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, green, blue); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 7种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv3</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 颜色分布指定比例 */</span></span><br><span class="line"><span class="selector-id">#testDiv4</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/css笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-jquery笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/jquery笔记/">jquery笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/jquery笔记/" class="archive-article-date">
+  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、监听浏览器窗口变化</a><br><a href="#mark2">2、添加\移除class</a><br><a href="#mark3">3、设置css</a>  </p>
+<p><a id="mark1"></a></p>
+<h4 id="1、监听浏览器窗口变化"><a href="#1、监听浏览器窗口变化" class="headerlink" title="1、监听浏览器窗口变化"></a>1、监听浏览器窗口变化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).resize(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;          <span class="comment">//当浏览器大小变化时</span></span><br><span class="line">    <span class="comment">//浏览器时下窗口可视区域高度</span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">window</span>).height()); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档的高度         </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>).height());   </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的高度     </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).height());  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的总高度 包括border padding margin </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).outerHeight(<span class="literal">true</span>)); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a id="mark2"></a></p>
+<h4 id="2、添加-移除class"><a href="#2、添加-移除class" class="headerlink" title="2、添加\移除class"></a>2、添加\移除class</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#test“).addClass("</span>testClass<span class="string">");</span></span><br><span class="line">$("#test“).removeClass("testClass");</span><br></pre></td></tr></table></figure>
+<p><a id="mark3"></a></p>
+<h4 id="3、设置css"><a href="#3、设置css" class="headerlink" title="3、设置css"></a>3、设置css</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#testDiv"</span>).css(<span class="string">"height"</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jquery</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/jquery笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇文章" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +336,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、按照教程完成基础搭建"><a href="#一、按照教程完成基础搭建" class="headerlink" title="一、按照教程完成基础搭建"></a>一、按照教程完成基础搭建</h3><p>博主使用的教程<br>安装: <a href="https://www.cnblogs.com/jackyroc/p/7681938.html" target="_blank" rel="noopener">hexo + github 搭建个人博客</a></p>
+        <h3 id="一、按照教程完成基础搭建"><a href="#一、按照教程完成基础搭建" class="headerlink" title="一、按照教程完成基础搭建"></a>一、按照教程完成基础搭建</h3><p>博主使用的教程<br>安装: <a href="https://www.cnblogs.com/jackyroc/p/7681938.html" target="_blank" rel="noopener">hexo + github 搭建个人博客</a><br>日常维护<br>维护: <a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">使用hexo，如果换了电脑怎么更新博客？</a></p>
 <h3 id="二、安装所有文章模块"><a href="#二、安装所有文章模块" class="headerlink" title="二、安装所有文章模块"></a>二、安装所有文章模块</h3><p>1、在博客根目录（注意不是yilia根目录）执行以下命令(确保node版本大于6.2)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-generator-json-content --save</span><br></pre></td></tr></table></figure></p>
 <p>2、在根目录_config.yml里添加配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">jsonContent:</span><br><span class="line">  meta: false</span><br><span class="line">  pages: false</span><br><span class="line">  posts:</span><br><span class="line">    title: true</span><br><span class="line">    date: true</span><br><span class="line">    path: true</span><br><span class="line">    text: false</span><br><span class="line">    raw: false</span><br><span class="line">    content: false</span><br><span class="line">    slug: false</span><br><span class="line">    updated: false</span><br><span class="line">    comments: false</span><br><span class="line">    link: false</span><br><span class="line">    permalink: false</span><br><span class="line">    excerpt: false</span><br><span class="line">    categories: false</span><br><span class="line">    tags: true</span><br></pre></td></tr></table></figure></p>
 
@@ -390,6 +554,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
