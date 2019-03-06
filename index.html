@@ -152,37 +152,84 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-css笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+    <article id="post-EFK日志系统搭建实践" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/css笔记/">css笔记</a>
+      <a class="article-title" href="/2019/03/06/EFK日志系统搭建实践/">EFK日志系统搭建实践</a>
     </h1>
   
 
         
-        <a href="/2019/02/27/css笔记/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+        <a href="/2019/03/06/EFK日志系统搭建实践/" class="archive-article-date">
+  	<time datetime="2019-03-06T06:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、隐藏滚动条</a><br><a href="#mark2">2、div居中</a><br><a href="#mark3">3、元素动画(左右移动)</a><br><a href="#mark4">4、选中元素内指定子元素</a><br><a href="#mark5">5、颜色渐变</a></p>
-<p><a id="mark1"></a></p>
-<h4 id="1、隐藏滚动条"><a href="#1、隐藏滚动条" class="headerlink" title="1、隐藏滚动条"></a>1、隐藏滚动条</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.inner-container</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">    <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">    <span class="attribute">scrollbar-width</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* for Chrome 只针对谷歌浏览器*/</span></span><br><span class="line"><span class="selector-class">.inner-container</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a id="mark2"></a></p>
-<h4 id="2、div居中"><a href="#2、div居中" class="headerlink" title="2、div居中"></a>2、div居中</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#testDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p><a id="mark3"></a></p>
-<h4 id="3、元素动画-左右移动"><a href="#3、元素动画-左右移动" class="headerlink" title="3、元素动画(左右移动)"></a>3、元素动画(左右移动)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#enterLeft</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">-webkit-animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line">    <span class="attribute">animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p><a id="mark4"></a></p>
-<h4 id="4、选中元素内指定子元素"><a href="#4、选中元素内指定子元素" class="headerlink" title="4、选中元素内指定子元素"></a>4、选中元素内指定子元素</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 第一个li */</span> </span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span>&#123;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 最后一个li */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 第五个   */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(5)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p><a id="mark5"></a></p>
-<h4 id="5、颜色渐变"><a href="#5、颜色渐变" class="headerlink" title="5、颜色渐变"></a>5、颜色渐变</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 双色 */</span></span><br><span class="line"><span class="comment">/* 方向可以是 left、right、bottom left等等 */</span></span><br><span class="line"><span class="comment">/* 也可以指定角度 90deg */</span></span><br><span class="line"><span class="selector-id">#testDiv1</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">2.5px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(left, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv2</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, green, blue); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, green, blue); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, green, blue); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, green, blue); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 7种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv3</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 颜色分布指定比例 */</span></span><br><span class="line"><span class="selector-id">#testDiv4</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="一、什么是EFK"><a href="#一、什么是EFK" class="headerlink" title="一、什么是EFK"></a>一、什么是EFK</h3><p>EFK是ELK的变种，主要是将日志进行聚合，方便查询。<br>EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。<br>EFK是将ELK中的Logstash替换成Filebeat，两者对比如下<br>| 对比 | 优势 | 劣势 | 备注 |<br>| :——–: | ———– | ——– | ——– |<br>| Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池|<br>| Filebeat | 资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)  | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x) | 一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题|</p>
+<h3 id="二、EFK具体组成"><a href="#二、EFK具体组成" class="headerlink" title="二、EFK具体组成"></a>二、EFK具体组成</h3><p>E：Elasticsearch - 数据存储、搜索、分析<br>Elasticsearch是个开源分布式搜索引擎，提供搜集、分析、存储数据三大功能。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。<br>F：Filebeat - 数据搜集<br>K：Kibana - 数据展示<br><strong>最简单的EFK架构图</strong><br><img src="../imgs/img-efk-01.jpg" alt="架构图"></p>
+<h3 id="三、搭建步骤"><a href="#三、搭建步骤" class="headerlink" title="三、搭建步骤"></a>三、搭建步骤</h3><h4 id="1、ES安装"><a href="#1、ES安装" class="headerlink" title="1、ES安装"></a>1、ES安装</h4><p>因为ES需要java运行环境（Java 8 及以上），所以先要安装Java 8 下载地址，下载完成后，使用工具上传到服务器<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>修改系统环境变量<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>在文件末尾加上如下内容<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_181/</span><br><span class="line">JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="line">export JAVA_HOME JRE_HOME CLASS_PATH PATH</span><br></pre></td></tr></table></figure></p>
+<p>其中JAVA_HOME后面的路径替换为自己jdk的解压路径<br>按下ESC键进入命令行模式，输入以下代码,保存并退出<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure></p>
+<p>让刚刚配置的环境变量生效<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>检验jdk是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
+<p>出现版本号信息则表示安装成功</p>
+<p>下载ES，这里使用的版本为6.6.1，注意ES、Filebeat以及Kibana必须使用相同的版本<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入ES根目录，修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config/elasticsearch.yml</span><br></pre></td></tr></table></figure></p>
+<p>修改为以下参数<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure></p>
+<p>Elasticsearch不能使用root用户打开，所以需要额外的一个用户来启动它<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adduser elastic</span><br><span class="line"><span class="meta">#</span>设置密码（需要输入两次）</span><br><span class="line">passwd 123456789</span><br><span class="line"><span class="meta">#</span>设置文件夹权限</span><br><span class="line">chmod -R 777 /usr/efk/es/elasticsearch-6.6.1</span><br><span class="line"><span class="meta">#</span>切换用户</span><br><span class="line">su elastic</span><br></pre></td></tr></table></figure></p>
+<p>启动ES<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elastcsearch</span><br></pre></td></tr></table></figure></p>
+<p><strong>可能会遇到的问题</strong></p>
+<ol>
+<li><p>启动时内存不足</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Java HotSpot(TM) 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000c5330000, 986513408, 0) failed; error=&apos;Cannot allocate memory&apos; (errno=12)</span><br><span class="line">#</span><br><span class="line"># There is insufficient memory for the Java Runtime Environment to continue.</span><br><span class="line"># Native memory allocation (mmap) failed to map 986513408 bytes for committing reserved memory.</span><br><span class="line"># An error report file with more information is saved as:</span><br><span class="line"># logs/hs_err_pid13544.log</span><br></pre></td></tr></table></figure>
+<p>这是因为ES默认的最小内存为1G，如果是测试环境可修改为更小的值，方法如下<br>进入ES根目录，修改配置文件jvm.options</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /config/jvm.options</span><br></pre></td></tr></table></figure>
+<p>修改以下两个参数到合适的大小，这里我们修改为200m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms200m</span><br><span class="line">-XMX200m</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大文件描述太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max file descriptors [65535] for elasticsearch process is too low, increase to at least [65536]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户，修改系统限制配置(<a href="http://www.mamicode.com/info-detail-1941785.html" target="_blank" rel="noopener">limits.conf的作用</a>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+<p>将如下两个配置从65535修改为65536</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nofile 65536 </span><br><span class="line">* hard nofile 65536</span><br></pre></td></tr></table></figure>
+<p>如果没有这两个配置就在后面加上这两个，按下ESC键，输入以下指令保存并退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大线程数太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max number of threads [3882] for user [elastic] is too low, increase to at least [4096]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户<br>方案1、进入limits.d目录下修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.d/90-nproc.conf</span><br></pre></td></tr></table></figure>
+<p>将如下配置从3882修改为5000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nproc 5000</span><br><span class="line">* hard nproc 5000</span><br></pre></td></tr></table></figure>
+<p>方案2、如果没有90-nproc.conf此配置文件，那么就在问题2的配置文件后面追加如下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* soft nproc 5000</span><br><span class="line">* hard nproc 5000</span><br><span class="line">root soft nproc 5000</span><br><span class="line">root hard nproc 5000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大虚拟内存区域太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户，修改sysctl.conf配置文件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p> 在文件内容末尾添加如下配置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
+<p> 按ESC键，输入以下命令保存并退出</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<p> 执行如下命令</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p> 以上所有配置文件的修改需要root用户权限</p>
+</li>
+</ol>
+<p>解决完所有问题后，启动ES，并输入以下命令验证是否启动成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1:9200  </span><br><span class="line">```    </span><br><span class="line">如果出现以下json数据，则表示启动成功</span><br><span class="line">```json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot; : &quot;wL6HMwx&quot;,</span><br><span class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</span><br><span class="line">  &quot;cluster_uuid&quot; : &quot;FRes2_jQTNydfbLcmEwHfg&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;6.6.1&quot;,</span><br><span class="line">    &quot;build_flavor&quot; : &quot;default&quot;,</span><br><span class="line">    &quot;build_type&quot; : &quot;tar&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;1fd8f69&quot;,</span><br><span class="line">    &quot;build_date&quot; : &quot;2019-02-13T17:10:04.160291Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;7.6.0&quot;,</span><br><span class="line">    &quot;minimum_wire_compatibility_version&quot; : &quot;5.6.0&quot;,</span><br><span class="line">    &quot;minimum_index_compatibility_version&quot; : &quot;5.0.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.jianshu.com/p/4bf5a8b743d2" target="_blank" rel="noopener">EFK安装教程</a></p>
 
       
 
@@ -196,7 +243,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">-- EFK</a>
         		</li>
       		
 		</ul>
@@ -206,7 +253,243 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/css笔记/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/03/06/EFK日志系统搭建实践/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-推荐系统" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/推荐系统/">推荐系统</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/01/推荐系统/" class="archive-article-date">
+  	<time datetime="2019-03-01T02:47:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h2><h3 id="方式1：从0开始编写推荐系统"><a href="#方式1：从0开始编写推荐系统" class="headerlink" title="方式1：从0开始编写推荐系统"></a>方式1：从0开始编写推荐系统</h3><p>优势：   </p>
+<ul>
+<li>可以更加透彻的了解推荐系统的实现方式，提高自身水平  </li>
+</ul>
+<p>劣势：  </p>
+<ul>
+<li><p>学习成本较高，<br>具体体现在：  </p>
+<ul>
+<li>涉及相关专业数学知识和理论，</li>
+<li>对自身的数学功底要求高(比如一些推荐算法模型和公式)，以及如何从自身业务抽象出数学模型等等，  </li>
+</ul>
+</li>
+<li><p>开发周期特别长  </p>
+</li>
+</ul>
+<h3 id="方式2：借助已有的开源项目进行二次开发"><a href="#方式2：借助已有的开源项目进行二次开发" class="headerlink" title="方式2：借助已有的开源项目进行二次开发"></a>方式2：借助已有的开源项目进行二次开发</h3><p>优势：  </p>
+<ul>
+<li>可以暂时跳过一些数学模型的设计以及偏理论的东西  </li>
+<li>开源项目已经实现了一些常用推荐算法、无需重复造轮子  </li>
+<li>有标准代码参考，方便后续二次开发     </li>
+</ul>
+<p>劣势：  </p>
+<ul>
+<li>推荐算法的核心部分没有参与到其中，没有清晰的概念和对实现方式一头雾水  </li>
+</ul>
+<p>解决方案：  </p>
+<ul>
+<li>虽然没有参与到算法的实现，但是可以看到源码  </li>
+<li>在了解一些基础知识以后可以尝试阅读算法的源码  </li>
+<li>在它们的基础上进行改造，逐渐形成适用于自身业务的推荐算法</li>
+</ul>
+<h2 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h2><p>就目前调研来看，推荐系统并不是独立的一个系统，它同样需要其他几个项目的支持（日志收集=》大数据分析）</p>
+<ol>
+<li>如何收集有效数据（数据埋点）  </li>
+<li>数据模型如何定义（建模）  </li>
+<li>开源的项目的推荐算法是否支持我们公司的当前业务范畴  </li>
+<li>推荐系统使用何种架构  </li>
+</ol>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
+<li><a href="https://www.jianshu.com/p/3ad6e87f3eec" target="_blank" rel="noopener">推荐系统干货</a>  </li>
+<li><a href="https://www.librec.net/dokuwiki/doku.php?id=index_zh" target="_blank" rel="noopener">java推荐算法开源工具库</a>  </li>
+<li><a href="http://www.cnblogs.com/kobedeshow/p/3569525.html?utm_source=tuicool" target="_blank" rel="noopener">推荐系统架构</a>  </li>
+<li><a href="https://www.biaodianfu.com/taobao-recommendation-system.html?utm_source=tuicool" target="_blank" rel="noopener">淘宝推荐系统</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">-- 推荐</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/01/推荐系统/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ELK与EFK日志收集系统" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/ELK与EFK日志收集系统/">ELK与EFK日志收集系统</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/01/ELK与EFK日志收集系统/" class="archive-article-date">
+  	<time datetime="2019-03-01T02:12:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="日志收集系统"><a href="#日志收集系统" class="headerlink" title="日志收集系统"></a>日志收集系统</h2><h3 id="ELK"><a href="#ELK" class="headerlink" title="ELK"></a>ELK</h3><p>E：Elasticsearch<br>L：Logstash<br>K：Kibana</p>
+<p>问题：logstash资源占用太高</p>
+<h3 id="EFK"><a href="#EFK" class="headerlink" title="EFK"></a>EFK</h3><p>E：Elasticsearch<br>F：Filebeat(Fluentd、Flume)<br>K：Kibana    </p>
+<p>ELK 和 EFK 两个区别主要是logstash、Filebeat和Fluentd的相互之间的替代(也可以一起使用)</p>
+<p>多种组合方式</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对比</th>
+<th>优势</th>
+<th>劣势</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Logstash</td>
+<td>灵活度高<br>插件多<br>处理问题范围广</td>
+<td>与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存</td>
+<td>Redis或Kafka作为中心缓存池</td>
+</tr>
+<tr>
+<td style="text-align:center">Filebeat</td>
+<td>资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)</td>
+<td>应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x)</td>
+<td>一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题</td>
+</tr>
+<tr>
+<td style="text-align:center">Fluentd</td>
+<td>插件类型全面，可实现轻松对接<br> JSON数据格式，多语言接入方便</td>
+<td>JSON格式灵活性差<br>缓存只在输出端，大节点性能受限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h3><ol>
+<li><p>日志结构：日志级别+IP地址+项目名称+版本号+时间戳+请求方IP地址+接口名称+参数+错误信息(可选)？？？<br>日志级别：DEBUG、INFO、ERROR ？？？<br>e.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[INFO] 10.10.0.1 JayHomeAdmin v1.1 2019-03-05 12:00:00 192.168.0.2 getUserInfo:&#123;userId: 1&#125; errorInfo:&#123;/* errorMsg */&#125;</span><br><span class="line">[ERROR] 11.1.0.1 JayHomeApi v2.0 2019-03-05 13:00:00 192.168.1.1 getTopicList:&#123;themeId: 1&#125; errorInfo:&#123;/* errorMsg */&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日志存储：ES ？？？</p>
+</li>
+<li>日志收集：Filebeat=》Kafka=》Logstash ？？？</li>
+</ol>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><ul>
+<li><a href="http://www.amd5.cn/atang_3847.html" target="_blank" rel="noopener">日志采集工具Logstash、Filebeat、Fluentd、Logagent、logtail、rsyslog、syslog-ng对比</a>  </li>
+<li><a href="https://www.jianshu.com/p/8384f6cd0f22" target="_blank" rel="noopener">logstash替代方案</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">-- 日志系统 -- ELK -- EFK</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/01/ELK与EFK日志收集系统/">展开全文 >></a>
         </p>
       
 
@@ -287,6 +570,90 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/02/27/jquery笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-css笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/css笔记/">css笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/css笔记/" class="archive-article-date">
+  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、隐藏滚动条</a><br><a href="#mark2">2、div居中</a><br><a href="#mark3">3、元素动画(左右移动)</a><br><a href="#mark4">4、选中元素内指定子元素</a><br><a href="#mark5">5、颜色渐变</a></p>
+<p><a id="mark1"></a></p>
+<h4 id="1、隐藏滚动条"><a href="#1、隐藏滚动条" class="headerlink" title="1、隐藏滚动条"></a>1、隐藏滚动条</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.inner-container</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">    <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">    <span class="attribute">scrollbar-width</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* for Chrome 只针对谷歌浏览器*/</span></span><br><span class="line"><span class="selector-class">.inner-container</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark2"></a></p>
+<h4 id="2、div居中"><a href="#2、div居中" class="headerlink" title="2、div居中"></a>2、div居中</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#testDiv</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark3"></a></p>
+<h4 id="3、元素动画-左右移动"><a href="#3、元素动画-左右移动" class="headerlink" title="3、元素动画(左右移动)"></a>3、元素动画(左右移动)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#enterLeft</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">-webkit-animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line">    <span class="attribute">animation</span>: moveLeft <span class="number">0.6s</span> infinite alternate;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">keyframes</span> moveLeft &#123;</span><br><span class="line">    0% &#123; <span class="attribute">left</span>: <span class="number">0px</span>; &#125;</span><br><span class="line">    100% &#123; <span class="attribute">left</span>: -<span class="number">10px</span>; &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark4"></a></p>
+<h4 id="4、选中元素内指定子元素"><a href="#4、选中元素内指定子元素" class="headerlink" title="4、选中元素内指定子元素"></a>4、选中元素内指定子元素</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 第一个li */</span> </span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span>&#123;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 最后一个li */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* 第五个   */</span></span><br><span class="line"><span class="selector-id">#testDiv</span> &gt; <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(5)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><a id="mark5"></a></p>
+<h4 id="5、颜色渐变"><a href="#5、颜色渐变" class="headerlink" title="5、颜色渐变"></a>5、颜色渐变</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 双色 */</span></span><br><span class="line"><span class="comment">/* 方向可以是 left、right、bottom left等等 */</span></span><br><span class="line"><span class="comment">/* 也可以指定角度 90deg */</span></span><br><span class="line"><span class="selector-id">#testDiv1</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">2.5px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(left, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, rgba(198, 198, 198, 0), <span class="built_in">rgba</span>(198, 198, 198, 1));</span><br><span class="line">    <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv2</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, green, blue); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, green, blue); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, green, blue); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, green, blue); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 7种颜色均匀分布 */</span></span><br><span class="line"><span class="selector-id">#testDiv3</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red, orange, yellow, green, blue, indigo, violet); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 颜色分布指定比例 */</span></span><br><span class="line"><span class="selector-id">#testDiv4</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Safari 5.1 - 6.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Opera 11.1 - 12.0 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* Firefox 3.6 - 15 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(red 10%, yellow 50%, blue 90%); <span class="comment">/* 标准的语法（必须放在最后） */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/css笔记/">展开全文 >></a>
         </p>
       
 
@@ -556,11 +923,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">-- EFK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">-- 日志系统 -- ELK -- EFK</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">-- 推荐</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: css | Doom-TY的博客</title>
+  <title>EFK日志系统搭建实践 | Doom-TY的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Doom-TY的博客">
-<meta property="og:url" content="http://yoursite.com/tags/css/index.html">
+  <meta name="description" content="一、什么是EFKEFK是ELK的变种，主要是将日志进行聚合，方便查询。EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。EFK是将ELK中的Logstash替换成Filebeat，两者对比如下| 对比 | 优势 | 劣势 | 备注 || :——–: | ———– | ——– | ——– || Logstash | 灵活度高插件多处理问题范围广">
+<meta name="keywords" content="-- EFK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EFK日志系统搭建实践">
+<meta property="og:url" content="http://yoursite.com/2019/03/06/EFK日志系统搭建实践/index.html">
 <meta property="og:site_name" content="Doom-TY的博客">
+<meta property="og:description" content="一、什么是EFKEFK是ELK的变种，主要是将日志进行聚合，方便查询。EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。EFK是将ELK中的Logstash替换成Filebeat，两者对比如下| 对比 | 优势 | 劣势 | 备注 || :——–: | ———– | ——– | ——– || Logstash | 灵活度高插件多处理问题范围广">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/imgs/img-efk-01.jpg">
+<meta property="og:updated_time" content="2019-03-06T10:10:39.050Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Doom-TY的博客">
+<meta name="twitter:title" content="EFK日志系统搭建实践">
+<meta name="twitter:description" content="一、什么是EFKEFK是ELK的变种，主要是将日志进行聚合，方便查询。EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。EFK是将ELK中的Logstash替换成Filebeat，两者对比如下| 对比 | 优势 | 劣势 | 备注 || :——–: | ———– | ——– | ——– || Logstash | 灵活度高插件多处理问题范围广">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/06/imgs/img-efk-01.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Doom-TY的博客" type="application/atom+xml">
   
@@ -150,60 +157,216 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-EFK日志系统搭建实践" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/css笔记/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/css笔记/">css笔记</a>
+    <h1 class="article-title" itemprop="name">
+      EFK日志系统搭建实践
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/06/EFK日志系统搭建实践/" class="archive-article-date">
+  	<time datetime="2019-03-06T06:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、什么是EFK"><a href="#一、什么是EFK" class="headerlink" title="一、什么是EFK"></a>一、什么是EFK</h3><p>EFK是ELK的变种，主要是将日志进行聚合，方便查询。<br>EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。<br>EFK是将ELK中的Logstash替换成Filebeat，两者对比如下<br>| 对比 | 优势 | 劣势 | 备注 |<br>| :——–: | ———– | ——– | ——– |<br>| Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池|<br>| Filebeat | 资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)  | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x) | 一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题|</p>
+<h3 id="二、EFK具体组成"><a href="#二、EFK具体组成" class="headerlink" title="二、EFK具体组成"></a>二、EFK具体组成</h3><p>E：Elasticsearch - 数据存储、搜索、分析<br>Elasticsearch是个开源分布式搜索引擎，提供搜集、分析、存储数据三大功能。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。<br>F：Filebeat - 数据搜集<br>K：Kibana - 数据展示<br><strong>最简单的EFK架构图</strong><br><img src="../imgs/img-efk-01.jpg" alt="架构图"></p>
+<h3 id="三、搭建步骤"><a href="#三、搭建步骤" class="headerlink" title="三、搭建步骤"></a>三、搭建步骤</h3><h4 id="1、ES安装"><a href="#1、ES安装" class="headerlink" title="1、ES安装"></a>1、ES安装</h4><p>因为ES需要java运行环境（Java 8 及以上），所以先要安装Java 8 下载地址，下载完成后，使用工具上传到服务器<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>修改系统环境变量<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>在文件末尾加上如下内容<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_181/</span><br><span class="line">JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br><span class="line">export JAVA_HOME JRE_HOME CLASS_PATH PATH</span><br></pre></td></tr></table></figure></p>
+<p>其中JAVA_HOME后面的路径替换为自己jdk的解压路径<br>按下ESC键进入命令行模式，输入以下代码,保存并退出<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure></p>
+<p>让刚刚配置的环境变量生效<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>检验jdk是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
+<p>出现版本号信息则表示安装成功</p>
+<p>下载ES，这里使用的版本为6.6.1，注意ES、Filebeat以及Kibana必须使用相同的版本<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入ES根目录，修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config/elasticsearch.yml</span><br></pre></td></tr></table></figure></p>
+<p>修改为以下参数<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure></p>
+<p>Elasticsearch不能使用root用户打开，所以需要额外的一个用户来启动它<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adduser elastic</span><br><span class="line"><span class="meta">#</span>设置密码（需要输入两次）</span><br><span class="line">passwd 123456789</span><br><span class="line"><span class="meta">#</span>设置文件夹权限</span><br><span class="line">chmod -R 777 /usr/efk/es/elasticsearch-6.6.1</span><br><span class="line"><span class="meta">#</span>切换用户</span><br><span class="line">su elastic</span><br></pre></td></tr></table></figure></p>
+<p>启动ES<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elastcsearch</span><br></pre></td></tr></table></figure></p>
+<p><strong>可能会遇到的问题</strong></p>
+<ol>
+<li><p>启动时内存不足</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Java HotSpot(TM) 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000c5330000, 986513408, 0) failed; error=&apos;Cannot allocate memory&apos; (errno=12)</span><br><span class="line">#</span><br><span class="line"># There is insufficient memory for the Java Runtime Environment to continue.</span><br><span class="line"># Native memory allocation (mmap) failed to map 986513408 bytes for committing reserved memory.</span><br><span class="line"># An error report file with more information is saved as:</span><br><span class="line"># logs/hs_err_pid13544.log</span><br></pre></td></tr></table></figure>
+<p>这是因为ES默认的最小内存为1G，如果是测试环境可修改为更小的值，方法如下<br>进入ES根目录，修改配置文件jvm.options</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /config/jvm.options</span><br></pre></td></tr></table></figure>
+<p>修改以下两个参数到合适的大小，这里我们修改为200m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms200m</span><br><span class="line">-XMX200m</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大文件描述太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max file descriptors [65535] for elasticsearch process is too low, increase to at least [65536]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户，修改系统限制配置(<a href="http://www.mamicode.com/info-detail-1941785.html" target="_blank" rel="noopener">limits.conf的作用</a>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+<p>将如下两个配置从65535修改为65536</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nofile 65536 </span><br><span class="line">* hard nofile 65536</span><br></pre></td></tr></table></figure>
+<p>如果没有这两个配置就在后面加上这两个，按下ESC键，输入以下指令保存并退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大线程数太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max number of threads [3882] for user [elastic] is too low, increase to at least [4096]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户<br>方案1、进入limits.d目录下修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.d/90-nproc.conf</span><br></pre></td></tr></table></figure>
+<p>将如下配置从3882修改为5000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nproc 5000</span><br><span class="line">* hard nproc 5000</span><br></pre></td></tr></table></figure>
+<p>方案2、如果没有90-nproc.conf此配置文件，那么就在问题2的配置文件后面追加如下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* soft nproc 5000</span><br><span class="line">* hard nproc 5000</span><br><span class="line">root soft nproc 5000</span><br><span class="line">root hard nproc 5000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最大虚拟内存区域太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</span><br></pre></td></tr></table></figure>
+<p>切换到root用户，修改sysctl.conf配置文件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p> 在文件内容末尾添加如下配置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
+<p> 按ESC键，输入以下命令保存并退出</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<p> 执行如下命令</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p> 以上所有配置文件的修改需要root用户权限</p>
+</li>
+</ol>
+<p>解决完所有问题后，启动ES，并输入以下命令验证是否启动成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1:9200  </span><br><span class="line">```    </span><br><span class="line">如果出现以下json数据，则表示启动成功</span><br><span class="line">```json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot; : &quot;wL6HMwx&quot;,</span><br><span class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</span><br><span class="line">  &quot;cluster_uuid&quot; : &quot;FRes2_jQTNydfbLcmEwHfg&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;6.6.1&quot;,</span><br><span class="line">    &quot;build_flavor&quot; : &quot;default&quot;,</span><br><span class="line">    &quot;build_type&quot; : &quot;tar&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;1fd8f69&quot;,</span><br><span class="line">    &quot;build_date&quot; : &quot;2019-02-13T17:10:04.160291Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;7.6.0&quot;,</span><br><span class="line">    &quot;minimum_wire_compatibility_version&quot; : &quot;5.6.0&quot;,</span><br><span class="line">    &quot;minimum_index_compatibility_version&quot; : &quot;5.0.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.jianshu.com/p/4bf5a8b743d2" target="_blank" rel="noopener">EFK安装教程</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">-- EFK</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/06/EFK日志系统搭建实践/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/01/推荐系统/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">推荐系统</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、什么是EFK"><span class="toc-number">1.</span> <span class="toc-text">一、什么是EFK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、EFK具体组成"><span class="toc-number">2.</span> <span class="toc-text">二、EFK具体组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、搭建步骤"><span class="toc-number">3.</span> <span class="toc-text">三、搭建步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、ES安装"><span class="toc-number">3.1.</span> <span class="toc-text">1、ES安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关资料"><span class="toc-number">4.</span> <span class="toc-text">相关资料</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +389,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
