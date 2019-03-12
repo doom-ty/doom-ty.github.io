@@ -302,7 +302,6 @@ filebeat-6.6.1-*
 [Ngnix实现Kibana安全认证](https://www.cnblogs.com/yjmyzz/p/filebeat-turorial-and-kibana-login-setting-with-nginx.html)
 [X-pack实现Kibana安全认证-收费](https://www.cnblogs.com/cjsblog/p/9501858.html)
 ### 相关资料
-[EFK安装教程](https://www.jianshu.com/p/4bf5a8b743d2)
 [ES、Filebeat、Kibana官网](https://www.elastic.co/cn/products)
 [Kibana查询语法(Lucene语法)](https://www.cnblogs.com/xing901022/p/4974977.html)
 [Kibana用户指南](https://www.elastic.co/guide/en/kibana/6.6/index.html)
