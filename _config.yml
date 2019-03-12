@@ -8,7 +8,7 @@ subtitle:
 description:
 keywords:
 author: doom-ty
-language:
+language: zh-CN
 
 timezone: Asia/Shanghai
 
@@ -74,7 +74,14 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yilia
+# theme: yilia
+# theme: landscape
+theme: next
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

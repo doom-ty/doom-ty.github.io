@@ -2,28 +2,29 @@
 title: EFK日志系统搭建实践
 date: 2019-03-06 14:19:57
 tags:
-    -- EFK
- # 赞赏    
-reward: false
-# 目录   
-toc: true   
+    - EFK
+categories: EFK     
 ---
+
+
 
 ### 一、什么是EFK
 EFK是ELK的变种，主要是将日志进行聚合，方便查询。  
 EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。  
-EFK是将ELK中的Logstash替换成Filebeat，两者对比如下  
-| 对比 | 优势 | 劣势 | 备注 |
-| :--------: | ----------- | -------- | -------- |
-| Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池|
-| Filebeat | 资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)  | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x) | 一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题|
+<!--more-->
+EFK是将ELK中的Logstash替换成Filebeat，两者对比如下
+
+ | 对比 | 优势 | 劣势 | 备注 |
+ | -------- | ----------- | -------- | -------- |
+ |Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br>资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池|
+ |Filebeat | 资源占用低<br>可靠性高<br>性能高 | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x)<br>只能简单过滤数据(5.x)  | 一般选择Kafka作为下游管道<br>如果选择Logstash还是会出现性能和资源消耗问题|
 ### 二、EFK具体组成
 E：Elasticsearch - 数据存储、搜索、分析  
 Elasticsearch是个开源分布式搜索引擎，提供搜集、分析、存储数据三大功能。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。  
 F：Filebeat - 数据搜集  
 K：Kibana - 数据展示  
 **最简单的EFK架构图**  
-![架构图](../imgs/img-efk-01.jpg)
+![架构图](/imgs/img-efk-01.jpg)
 ### 三、搭建步骤
 #### 1、ES安装
 因为ES需要java运行环境（Java 8 及以上），所以先要安装Java 8 下载地址，下载完成后，使用工具上传到服务器
@@ -89,8 +90,17 @@ chmod -R 777 /usr/efk/es/elasticsearch-6.6.1
 su elastic
 ```
 启动ES
-```
+```shell
+#前台运行，关闭会话窗口ES会停止
 ./bin/elastcsearch
+#后台运行
+./bin/elastcsearch -d
+```
+如何关闭ES 
+```shell
+ps -ef | grep elastic
+#找到进程号并杀死,假设这里为1234
+kill -9 1234
 ```
 **可能会遇到的问题**
 1. 启动时内存不足
@@ -196,7 +206,103 @@ curl 127.0.0.1:9200
   "tagline" : "You Know, for Search"
 }
 ```
+#### 2. 安装Kibana
+下载Kibana
+```shell
+wget https://artifacts.elastic.co/downloads/kibana/kibana-6.6.1-linux-x86_64.tar.gz
+```
+进入根目录，修改配置文件
+```shell
+vi config/kabana.yml
+```
+修改如下参数
+```yml
+server.port: 5601
+server.host: 0.0.0.0
+elasticsearch.hosts: ["http://localhost:9200"]
+kibana.index: ".kibana"
+```
+保存并退出
+启动Kibana
+```shell
+#前台运行
+./bin/kibana
+#后台运行
+nohup ./bin/kibana
+```
+如何停止Kibana
+```shell
+fuser -n tcp 5601
+#找到进程号，杀掉进程，假设这里为5678
+kill -9 5678
+```
 
 
+#### 3. 安装Filebeat
+下载Filebeat
+```shell
+wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.1-linux-x86_64.tar.gz
+```
+解压
+```shell
+tar -zxvf filebeat-6.6.1-linux-x86_64.tar.gz
+```
+进入根目录，修改配置文件
+```shell
+vi filebeat.yml
+```
+修改如下几个配置，注意缩进（[filebeat处理多行日志](https://my.oschina.net/openplus/blog/1589846)）
+
+```yml
+#=========================== Filebeat inputs =============================
+
+filebeat.inputs:
+- type: log
+  enabled: false
+  paths:
+    - /var/log/*.log
+    - /var/log/*.out
+    #- c:\programdata\elasticsearch\logs\*
+  ### Multiline options   
+  #不以YYYY-MM-DD格式开头的全部追加到上一行
+  multiline.pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}
+  multiline.negate: false
+  multiline.match: after
+#============================== Kibana =====================================
+setup.kibana:  
+  host: "localhost:5601"
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  hosts: ["localhost:9200"]  
+```
+启动Filebeat
+```
+./filebeat -c /usr/efk/filebeat/filebeat.yml
+```
+如何修改Filebeat默认ES索引
+[官方文档](https://www.elastic.co/guide/en/beats/filebeat/6.2/configuration-template.html)
+
+#### 5. 配置Kibana
+进入Kibana
+localhost:5601
+按下图顺序找到配置
+![Kibana配置1](/imgs/img-kibana-01.jpg)
+我们可以看到Filebeat创建的索引格式为filebeat-x.x.x-yyyy.mm.dd  
+这里显示的为filebeat-6.6.1-2019.03.07  
+所以为了匹配这个索引，我们需要在上方输入框输入以下索引匹配格式
+```html
+filebeat-6.6.1-*
+```
+点击Next Step进入下一步配置
+![Kibana配置1](/imgs/img-kibana-02.jpg)
+这里我们选择@timestamp  
+点击Create index pattern，然后进入 Discover面板就能看到Filebeat收集到的日志数据了
+
+#### 6. Kibana安全
+[Ngnix实现Kibana安全认证](https://www.cnblogs.com/yjmyzz/p/filebeat-turorial-and-kibana-login-setting-with-nginx.html)
+[X-pack实现Kibana安全认证-收费](https://www.cnblogs.com/cjsblog/p/9501858.html)
 ### 相关资料
 [EFK安装教程](https://www.jianshu.com/p/4bf5a8b743d2)
+[ES、Filebeat、Kibana官网](https://www.elastic.co/cn/products)
+[Kibana查询语法(Lucene语法)](https://www.cnblogs.com/xing901022/p/4974977.html)
+[Kibana用户指南](https://www.elastic.co/guide/en/kibana/6.6/index.html)

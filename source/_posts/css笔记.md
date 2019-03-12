@@ -3,10 +3,7 @@ title: css笔记
 date: 2019-02-27 09:43:11
 tags: 
     - css
-# 赞赏    
-reward: false
-# 目录   
-toc: true 
+categories: css
 ---
 ### 快速导航  
 [1、隐藏滚动条](#mark1)  
@@ -14,7 +11,7 @@ toc: true
 [3、元素动画(左右移动)](#mark3)  
 [4、选中元素内指定子元素](#mark4)  
 [5、颜色渐变](#mark5)
-
+<!--more-->
 
 <a id="mark1"></a>
 

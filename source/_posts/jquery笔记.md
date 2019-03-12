@@ -3,17 +3,14 @@ title: jquery笔记
 date: 2019-02-27 09:43:11
 tags: 
     - jquery
-# 赞赏    
-reward: false
-# 目录   
-toc: true 
+categories: jquery 
 ---
 ### 快速导航  
 [1、监听浏览器窗口变化](#mark1)  
 [2、添加\移除class](#mark2)  
 [3、设置css](#mark3)  
 
-
+<!--more-->
 <a id="mark1"></a>
 
 #### 1、监听浏览器窗口变化
