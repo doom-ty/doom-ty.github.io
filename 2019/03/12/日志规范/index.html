@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Doom-TY的博客">
 <meta property="og:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-12T09:27:30.604Z">
+<meta property="og:updated_time" content="2019-03-12T09:56:22.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常处理及日志规范">
 <meta name="twitter:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
@@ -418,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-03-12 08:49:52 / 修改时间：17:27:30" itemprop="dateCreated datePublished" datetime="2019-03-12T08:49:52+08:00">2019-03-12</time>
+              <time title="创建时间：2019-03-12 08:49:52 / 修改时间：17:56:22" itemprop="dateCreated datePublished" datetime="2019-03-12T08:49:52+08:00">2019-03-12</time>
             
 
             
@@ -477,7 +477,7 @@
       
         <h4 id="一、日志级别"><a href="#一、日志级别" class="headerlink" title="一、日志级别"></a>一、日志级别</h4><p>. info：记录的重要信息<br>. warn：警告信息<br>. error：系统运行错误<br>. debug：debug信息<br>. trace：比debug更详细的跟踪信息<br>一般开发中比较常用的为info、warn和error<br><a id="more"></a></p>
 <h4 id="二、规范详情"><a href="#二、规范详情" class="headerlink" title="二、规范详情"></a>二、规范详情</h4><ol>
-<li>【强制】不要再catch中使用printStackTrace()</li>
+<li>【强制】不要在catch中使用printStackTrace()</li>
 <li>【强制】不要在记录完日之后再次抛出异常，否则会记录两次错误信息<br>反例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;...&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">    log.err(<span class="string">"errorInfo &#123;&#125;"</span>, obj, e);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> MyException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
