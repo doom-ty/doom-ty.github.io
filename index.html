@@ -25,7 +25,7 @@
   <style type="text/css">
   
     #container.show {
-      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+      background: linear-gradient(200deg,#4d4d4d,#4d4d4d);
     }
   </style>
   
@@ -39,7 +39,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: #2B2B2B"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -94,7 +94,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: #2B2B2B"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -152,6 +152,143 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-日志规范" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/12/日志规范/">Java异常处理及日志规范</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/12/日志规范/" class="archive-article-date">
+  	<time datetime="2019-03-12T00:49:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、日志级别"><a href="#一、日志级别" class="headerlink" title="一、日志级别"></a>一、日志级别</h4><p>. info：记录的重要信息<br>. warn：警告信息<br>. error：系统运行错误<br>. debug：debug信息<br>. trace：比debug更详细的跟踪信息<br>一般开发中比较常用的为info、warn和error</p>
+<h4 id="二、规范详情"><a href="#二、规范详情" class="headerlink" title="二、规范详情"></a>二、规范详情</h4><ol>
+<li>【强制】不要再catch中使用printStackTrace()</li>
+<li>【强制】不要在记录完日之后再次抛出异常，否则会记录两次错误信息<br>反例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;...&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">    log.err(<span class="string">"errorInfo &#123;&#125;"</span>, obj, e);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> MyException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以下内容摘自《阿里巴巴java开发规范手册》</p>
+<h5 id="（一）异常处理"><a href="#（一）异常处理" class="headerlink" title="（一）异常处理"></a>（一）异常处理</h5><ol>
+<li><p>【强制】Java 类库中定义的可以通过预检查方式规避的 RuntimeException 异常不应该通过catch 的方式来处理，比如： NullPointerException ， IndexOutOfBoundsException 等等。<br> 说明：无法通过预检查的异常除外，比如，在解析字符串形式的数字时，不得不通过 catchNumberFormatException 来实现。<br> 正例：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (obj != <span class="keyword">null</span>) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p> 反例：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123; obj.method(); &#125; <span class="keyword">catch</span> (NullPointerException e) &#123;…&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>【强制】异常不要用来做流程控制，条件控制。<br> 说明：异常设计的初衷是解决程序运行中的各种意外情况，且异常的处理效率比条件判断方式要低很多。</li>
+<li>【强制】 catch 时请分清稳定代码和非稳定代码，稳定代码指的是无论如何不会出错的代码。对于非稳定代码的 catch 尽可能进行区分异常类型，再做对应的异常处理。<br> 说明：对大段代码进行 try - catch ，使程序无法根据不同的异常做出正确的应激反应，也不利于定位问题，这是一种不负责任的表现。<br> 正例：用户注册的场景中，如果用户输入非法字符，或用户名称已存在，或用户输入密码过于简单，在程序上作出分门别类的判断，并提示给用户。</li>
+<li>【强制】捕获异常是为了处理它，不要捕获了却什么都不处理而抛弃之，如果不想处理它，请将该异常抛给它的调用者。最外层的业务使用者，必须处理异常，将其转化为用户可以理解的内容。</li>
+<li>【强制】有 try 块放到了事务代码中， catch 异常后，如果需要回滚事务，一定要注意手动回滚事务。</li>
+<li>【强制】 finally 块必须对资源对象、流对象进行关闭，有异常也要做 try - catch 。<br> 说明：如果 JDK 7 及以上，可以使用 try - with - resources 方式。</li>
+<li>【强制】不要在 finally 块中使用 return 。<br> 说明： finally 块中的 return 返回后方法结束执行，不会再执行 try 块中的 return 语句。</li>
+<li>【强制】捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。<br> 说明：如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。</li>
+<li>【推荐】方法的返回值可以为 null ，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回 null 值。<br> 说明：本手册明确防止 NPE 是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回null 的情况。</li>
+<li>【推荐】防止 NPE ，是程序员的基本修养，注意 NPE 产生的场景：<br>1） 返回类型为基本数据类型， return 包装数据类型的对象时，自动拆箱有可能产生 NPE 。<br>　　反例： public int f()  {  return Integer 对象}， 如果为 null ，自动解箱抛 NPE 。<br>2 ） 数据库的查询结果可能为 null 。<br>3 ） 集合里的元素即使 isNotEmpty ，取出的数据元素也可能为 null 。<br>4 ） 远程调用返回对象时，一律要求进行空指针判断，防止 NPE 。<br>5 ） 对于 Session 中获取的数据，建议 NPE 检查，避免空指针。<br>6 ） 级联调用 obj.getA().getB().getC()； 一连串调用，易产生 NPE 。<br>　　正例：使用 JDK8 的 Optional 类来防止 NPE 问题。</li>
+<li>【推荐】定义时区分 unchecked /  checked 异常，避免直接抛出 new RuntimeException() ，更不允许抛出 Exception 或者 Throwable ，应使用有业务含义的自定义异常。推荐业界已定义过的自定义异常，如： DAOException /  ServiceException 等。</li>
+<li>【参考】对于公司外的 http / api 开放接口必须使用“错误码” ； 而应用内部推荐异常抛出 ；<br>跨应用间 RPC 调用优先考虑使用 Result 方式，封装 isSuccess()方法 、“错误码”、“错误简<br>短信息”。<br>说明：关于 RPC 方法返回方式使用 Result 方式的理由：<br>1 ） 使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。<br>2 ） 如果不加栈信息，只是 new 自定义异常，加入自己的理解的 error message ，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题。</li>
+<li>【参考】避免出现重复的代码 （Don ’ t Repeat Yourself） ，即 DRY 原则。<br>说明：随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。<br>正例：一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkParam</span><span class="params">(DTO dto)</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="二-日志规约"><a href="#二-日志规约" class="headerlink" title="( 二 ) 日志规约"></a>( 二 ) 日志规约</h5><ol>
+<li><p>【强制】应用中不可直接使用日志系统（Log4j、Logback）中的API ，而应依赖使用日志框架SLF4J中的API ，使用门面模式的日志框架，有利于维护和各个类的日志处理方式统一。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(Abc.class);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>【强制】日志文件至少保存 15 天，因为有些异常具备以“周”为频次发生的特点。</p>
+</li>
+<li>【强制】应用中的扩展日志 （ 如打点、临时监控、访问日志等 ）<br> 命名方式：<br> appName_logType_logName.log 。<br> logType :日志类型，如 stats / monitor / access 等 ；logName :日志描述。<br> 这种命名的好处：<br> 通过文件名就可知道日志文件属于什么应用，什么类型，什么目的，也有利于归类查找。<br> 正例： mppserver 应用中单独监控时区转换异常，如：<br> mppserver _ monitor _ timeZoneConvert . log<br> 说明：推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，也便于通过日志对系统进行及时监控。</li>
+<li><p>【强制】对 trace / debug / info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。<br> 说明： </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger . debug( <span class="string">" Processing trade with id : "</span> +  id + <span class="string">"  and symbol : "</span> +  symbol);</span><br></pre></td></tr></table></figure>
+<p> 如果日志级别是 warn ，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象，会执行 toString() 方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。<br> 正例：（ 条件 ）建设采用如下方式</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">    logger.debug(<span class="string">"Processing trade with id: "</span> + id + <span class="string">" and symbol: "</span> + symbol);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 正例：（ 占位符 ）</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger.debug(<span class="string">"Processing trade with id: &#123;&#125; and symbol : &#123;&#125; "</span>, id, symbol);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>【强制】避免重复打印日志，浪费磁盘空间，务必在 log 4 j . xml 中设置 additivityfalse 。<br> 正例： </p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.taobao.dubbo.config"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。<br> 正例： logger.error(各类参数或者对象 toString() + “_” + e.getMessage(), e);</p>
+</li>
+<li>【推荐】谨慎地记录日志。生产环境禁止输出 debug日志；有选择地输出 info 日志 ；如果使用 warn 来记录刚上线时的业务行为信息，一定要注意日志输出量的问题，避免把服务器磁盘撑爆，并记得及时删除这些观察日志。<br> 说明：大量地输出无效日志，不利于系统性能提升，也不利于快速定位错误点。记录日志时请<br> 思考：这些日志真的有人看吗？看到这条日志你能做什么？能不能给问题排查带来好处？</li>
+<li>【推荐】可以使用 warn 日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。如非必要，请不要在此场景打出 error 级别，避免频繁报警。<br> 说明：注意日志输出的级别，error 级别只记录系统逻辑出错、异常或者重要的错误信息。</li>
+<li>【推荐】尽量用英文来描述日志错误信息，如果日志中的错误信息用英文描述不清楚的话使用中文描述即可，否则容易产生歧义。国际化团队或海外部署的服务器由于字符集问题，【强制】使用全英文来注释和描述日志错误信息。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">规范</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">log</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">异常</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">exception</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/12/日志规范/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-EFK日志系统搭建实践" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +309,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、什么是EFK"><a href="#一、什么是EFK" class="headerlink" title="一、什么是EFK"></a>一、什么是EFK</h3><p>EFK是ELK的变种，主要是将日志进行聚合，方便查询。<br>EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。<br>EFK是将ELK中的Logstash替换成Filebeat，两者对比如下<br>| 对比 | 优势 | 劣势 | 备注 |<br>| :——–: | ———– | ——– | ——– |<br>| Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池|<br>| Filebeat | 资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)  | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x) | 一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题|</p>
+        <h3 id="一、什么是EFK"><a href="#一、什么是EFK" class="headerlink" title="一、什么是EFK"></a>一、什么是EFK</h3><p>EFK是ELK的变种，主要是将日志进行聚合，方便查询。<br>EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。<br>EFK是将ELK中的Logstash替换成Filebeat，两者对比如下<br> 对比 | 优势 | 劣势 | 备注 |<br> ——– | ———– | ——– | ——–<br> Logstash | 灵活度高<br>插件多<br>处理问题范围广 | 与其他替代品对比性能低<br> 资源占用高(默认堆为1GB)<br>不支持缓存 | Redis或Kafka作为中心缓存池<br> Filebeat | 资源占用低<br>可靠性高<br>性能高<br>日志过滤(5.x)  | 应用范围小<br>只支持将日志发送到ES、Logstash、redis(5.x)和kafka(5.x) | 一般选择Kafka作为下游管道，<br>如果选择Logstash还是会出现性能和资源消耗问题</p>
 <h3 id="二、EFK具体组成"><a href="#二、EFK具体组成" class="headerlink" title="二、EFK具体组成"></a>二、EFK具体组成</h3><p>E：Elasticsearch - 数据存储、搜索、分析<br>Elasticsearch是个开源分布式搜索引擎，提供搜集、分析、存储数据三大功能。它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。<br>F：Filebeat - 数据搜集<br>K：Kibana - 数据展示<br><strong>最简单的EFK架构图</strong><br><img src="../imgs/img-efk-01.jpg" alt="架构图"></p>
 <h3 id="三、搭建步骤"><a href="#三、搭建步骤" class="headerlink" title="三、搭建步骤"></a>三、搭建步骤</h3><h4 id="1、ES安装"><a href="#1、ES安装" class="headerlink" title="1、ES安装"></a>1、ES安装</h4><p>因为ES需要java运行环境（Java 8 及以上），所以先要安装Java 8 下载地址，下载完成后，使用工具上传到服务器<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
 <p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
@@ -187,7 +324,8 @@
 <p>进入ES根目录，修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config/elasticsearch.yml</span><br></pre></td></tr></table></figure></p>
 <p>修改为以下参数<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure></p>
 <p>Elasticsearch不能使用root用户打开，所以需要额外的一个用户来启动它<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adduser elastic</span><br><span class="line"><span class="meta">#</span>设置密码（需要输入两次）</span><br><span class="line">passwd 123456789</span><br><span class="line"><span class="meta">#</span>设置文件夹权限</span><br><span class="line">chmod -R 777 /usr/efk/es/elasticsearch-6.6.1</span><br><span class="line"><span class="meta">#</span>切换用户</span><br><span class="line">su elastic</span><br></pre></td></tr></table></figure></p>
-<p>启动ES<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elastcsearch</span><br></pre></td></tr></table></figure></p>
+<p>启动ES<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>前台运行，关闭会话窗口ES会停止</span><br><span class="line">./bin/elastcsearch</span><br><span class="line"><span class="meta">#</span>后台运行</span><br><span class="line">./bin/elastcsearch -d</span><br></pre></td></tr></table></figure></p>
+<p>如何关闭ES<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep elastic</span><br><span class="line"><span class="meta">#</span>找到进程号并杀死,假设这里为1234</span><br><span class="line">kill -9 1234</span><br></pre></td></tr></table></figure></p>
 <p><strong>可能会遇到的问题</strong></p>
 <ol>
 <li><p>启动时内存不足</p>
@@ -229,7 +367,22 @@
 </li>
 </ol>
 <p>解决完所有问题后，启动ES，并输入以下命令验证是否启动成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1:9200  </span><br><span class="line">```    </span><br><span class="line">如果出现以下json数据，则表示启动成功</span><br><span class="line">```json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot; : &quot;wL6HMwx&quot;,</span><br><span class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</span><br><span class="line">  &quot;cluster_uuid&quot; : &quot;FRes2_jQTNydfbLcmEwHfg&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;6.6.1&quot;,</span><br><span class="line">    &quot;build_flavor&quot; : &quot;default&quot;,</span><br><span class="line">    &quot;build_type&quot; : &quot;tar&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;1fd8f69&quot;,</span><br><span class="line">    &quot;build_date&quot; : &quot;2019-02-13T17:10:04.160291Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;7.6.0&quot;,</span><br><span class="line">    &quot;minimum_wire_compatibility_version&quot; : &quot;5.6.0&quot;,</span><br><span class="line">    &quot;minimum_index_compatibility_version&quot; : &quot;5.0.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.jianshu.com/p/4bf5a8b743d2" target="_blank" rel="noopener">EFK安装教程</a></p>
+<h4 id="2-安装Kibana"><a href="#2-安装Kibana" class="headerlink" title="2. 安装Kibana"></a>2. 安装Kibana</h4><p>下载Kibana<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/kibana/kibana-6.6.1-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入根目录，修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config/kabana.yml</span><br></pre></td></tr></table></figure></p>
+<p>修改如下参数<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">server.port:</span> <span class="number">5601</span></span><br><span class="line"><span class="string">server.host:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="string">elasticsearch.hosts:</span> <span class="string">["http://localhost:9200"]</span></span><br><span class="line"><span class="string">kibana.index:</span> <span class="string">".kibana"</span></span><br></pre></td></tr></table></figure></p>
+<p>保存并退出<br>启动Kibana<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>前台运行</span><br><span class="line">./bin/kibana</span><br><span class="line"><span class="meta">#</span>后台运行</span><br><span class="line">nohup ./bin/kibana</span><br></pre></td></tr></table></figure></p>
+<p>如何停止Kibana<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fuser -n tcp 5601</span><br><span class="line"><span class="meta">#</span>找到进程号，杀掉进程，假设这里为5678</span><br><span class="line">kill -9 5678</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-安装Filebeat"><a href="#3-安装Filebeat" class="headerlink" title="3. 安装Filebeat"></a>3. 安装Filebeat</h4><p>下载Filebeat<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.1-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf filebeat-6.6.1-linux-x86_64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入根目录，修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi filebeat.yml</span><br></pre></td></tr></table></figure></p>
+<p>修改如下几个配置，注意缩进（<a href="https://my.oschina.net/openplus/blog/1589846" target="_blank" rel="noopener">filebeat处理多行日志</a>）</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#=========================== Filebeat inputs =============================</span></span><br><span class="line"></span><br><span class="line"><span class="string">filebeat.inputs:</span></span><br><span class="line"><span class="attr">- type:</span> <span class="string">log</span></span><br><span class="line"><span class="attr">  enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  paths:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">/var/log/*.log</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">/var/log/*.out</span></span><br><span class="line">    <span class="comment">#- c:\programdata\elasticsearch\logs\*</span></span><br><span class="line">  <span class="comment">### Multiline options   </span></span><br><span class="line">  <span class="comment">#不以YYYY-MM-DD格式开头的全部追加到上一行</span></span><br><span class="line">  <span class="string">multiline.pattern:</span> <span class="string">^[0-9]&#123;4&#125;-[0-9]&#123;2&#125;-[0-9]&#123;2&#125;</span></span><br><span class="line">  <span class="string">multiline.negate:</span> <span class="literal">false</span></span><br><span class="line">  <span class="string">multiline.match:</span> <span class="string">after</span></span><br><span class="line"><span class="comment">#============================== Kibana =====================================</span></span><br><span class="line"><span class="string">setup.kibana:</span>  </span><br><span class="line"><span class="attr">  host:</span> <span class="string">"localhost:5601"</span></span><br><span class="line"><span class="comment">#-------------------------- Elasticsearch output ------------------------------</span></span><br><span class="line"><span class="string">output.elasticsearch:</span></span><br><span class="line"><span class="attr">  hosts:</span> <span class="string">["localhost:9200"]</span></span><br></pre></td></tr></table></figure>
+<p>启动Filebeat<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./filebeat -c /usr/efk/filebeat/filebeat.yml</span><br></pre></td></tr></table></figure></p>
+<p>如何修改Filebeat默认ES索引<br><a href="https://www.elastic.co/guide/en/beats/filebeat/6.2/configuration-template.html" target="_blank" rel="noopener">官方文档</a></p>
+<h4 id="5-配置Kibana"><a href="#5-配置Kibana" class="headerlink" title="5. 配置Kibana"></a>5. 配置Kibana</h4><p>进入Kibana<br>localhost:5601<br>按下图顺序找到配置<br><img src="../imgs/img-kibana-01.jpg" alt="Kibana配置1"><br>我们可以看到Filebeat创建的索引格式为filebeat-x.x.x-yyyy.mm.dd<br>这里显示的为filebeat-6.6.1-2019.03.07<br>所以为了匹配这个索引，我们需要在上方输入框输入以下索引匹配格式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebeat-6.6.1-*</span><br></pre></td></tr></table></figure></p>
+<p>点击Next Step进入下一步配置<br><img src="../imgs/img-kibana-02.jpg" alt="Kibana配置1"><br>这里我们选择@timestamp<br>点击Create index pattern，然后进入 Discover面板就能看到Filebeat收集到的日志数据了</p>
+<h4 id="6-Kibana安全"><a href="#6-Kibana安全" class="headerlink" title="6. Kibana安全"></a>6. Kibana安全</h4><p><a href="https://www.cnblogs.com/yjmyzz/p/filebeat-turorial-and-kibana-login-setting-with-nginx.html" target="_blank" rel="noopener">Ngnix实现Kibana安全认证</a><br><a href="https://www.cnblogs.com/cjsblog/p/9501858.html" target="_blank" rel="noopener">X-pack实现Kibana安全认证-收费</a></p>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.jianshu.com/p/4bf5a8b743d2" target="_blank" rel="noopener">EFK安装教程</a><br><a href="https://www.elastic.co/cn/products" target="_blank" rel="noopener">ES、Filebeat、Kibana官网</a><br><a href="https://www.cnblogs.com/xing901022/p/4974977.html" target="_blank" rel="noopener">Kibana查询语法(Lucene语法)</a><br><a href="https://www.elastic.co/guide/en/kibana/6.6/index.html" target="_blank" rel="noopener">Kibana用户指南</a></p>
 
       
 
@@ -254,86 +407,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/03/06/EFK日志系统搭建实践/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jquery笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/jquery笔记/">jquery笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/jquery笔记/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、监听浏览器窗口变化</a><br><a href="#mark2">2、添加\移除class</a><br><a href="#mark3">3、设置css</a>  </p>
-<p><a id="mark1"></a></p>
-<h4 id="1、监听浏览器窗口变化"><a href="#1、监听浏览器窗口变化" class="headerlink" title="1、监听浏览器窗口变化"></a>1、监听浏览器窗口变化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).resize(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;          <span class="comment">//当浏览器大小变化时</span></span><br><span class="line">    <span class="comment">//浏览器时下窗口可视区域高度</span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">window</span>).height()); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档的高度         </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>).height());   </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的高度     </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).height());  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的总高度 包括border padding margin </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).outerHeight(<span class="literal">true</span>)); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><a id="mark2"></a></p>
-<h4 id="2、添加-移除class"><a href="#2、添加-移除class" class="headerlink" title="2、添加\移除class"></a>2、添加\移除class</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#test"</span>).addClass(<span class="string">"testClass"</span>);</span><br><span class="line">$(<span class="string">"#test"</span>).removeClass(<span class="string">"testClass"</span>);</span><br></pre></td></tr></table></figure>
-<p><a id="mark3"></a></p>
-<h4 id="3、设置css"><a href="#3、设置css" class="headerlink" title="3、设置css"></a>3、设置css</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#testDiv"</span>).css(<span class="string">"height"</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jquery</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/jquery笔记/">展开全文 >></a>
         </p>
       
 
@@ -418,6 +491,86 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/02/27/css笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-jquery笔记" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/jquery笔记/">jquery笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/jquery笔记/" class="archive-article-date">
+  	<time datetime="2019-02-27T01:43:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="快速导航"><a href="#快速导航" class="headerlink" title="快速导航"></a>快速导航</h3><p><a href="#mark1">1、监听浏览器窗口变化</a><br><a href="#mark2">2、添加\移除class</a><br><a href="#mark3">3、设置css</a>  </p>
+<p><a id="mark1"></a></p>
+<h4 id="1、监听浏览器窗口变化"><a href="#1、监听浏览器窗口变化" class="headerlink" title="1、监听浏览器窗口变化"></a>1、监听浏览器窗口变化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).resize(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;          <span class="comment">//当浏览器大小变化时</span></span><br><span class="line">    <span class="comment">//浏览器时下窗口可视区域高度</span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">window</span>).height()); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档的高度         </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>).height());   </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的高度     </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).height());  </span><br><span class="line"></span><br><span class="line">    <span class="comment">//浏览器时下窗口文档body的总高度 包括border padding margin </span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="built_in">document</span>.body).outerHeight(<span class="literal">true</span>)); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a id="mark2"></a></p>
+<h4 id="2、添加-移除class"><a href="#2、添加-移除class" class="headerlink" title="2、添加\移除class"></a>2、添加\移除class</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#test"</span>).addClass(<span class="string">"testClass"</span>);</span><br><span class="line">$(<span class="string">"#test"</span>).removeClass(<span class="string">"testClass"</span>);</span><br></pre></td></tr></table></figure>
+<p><a id="mark3"></a></p>
+<h4 id="3、设置css"><a href="#3、设置css" class="headerlink" title="3、设置css"></a>3、设置css</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#testDiv"</span>).css(<span class="string">"height"</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jquery</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/jquery笔记/">展开全文 >></a>
         </p>
       
 
@@ -687,15 +840,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">-- EFK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">-- 日志系统 -- ELK -- EFK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+                <a href="javascript:void(0)" class="js-tag color4">EFK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,7 +848,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">-- 推荐</a>
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,7 +856,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">EFK</a>
+                <a href="javascript:void(0)" class="js-tag color3">规范</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">exception</a>
               </li>
             
             <div class="clearfix"></div>
