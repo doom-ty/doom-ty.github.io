@@ -307,3 +307,6 @@ filebeat-6.6.1-*
 [ES、Filebeat、Kibana官网](https://www.elastic.co/cn/products)
 [Kibana查询语法(Lucene语法)](https://www.cnblogs.com/xing901022/p/4974977.html)
 [Kibana用户指南](https://www.elastic.co/guide/en/kibana/6.6/index.html)
+[Docker中使用Filebeat](https://www.elastic.co/guide/en/beats/filebeat/6.5/running-on-docker.html)
+[K8s中使用Filebeat](https://www.elastic.co/guide/en/beats/filebeat/current/running-on-kubernetes.html)
+[Docker中使用ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
