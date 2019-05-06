@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Doom-TY的博客">
 <meta property="og:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-12T09:56:22.228Z">
+<meta property="og:updated_time" content="2019-05-06T03:06:46.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常处理及日志规范">
 <meta name="twitter:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2019-03-12 08:49:52 / 修改时间：17:56:22" itemprop="dateCreated datePublished" datetime="2019-03-12T08:49:52+08:00">2019-03-12</time>
+              <time title="创建时间：2019-03-12 08:49:52" itemprop="dateCreated datePublished" datetime="2019-03-12T08:49:52+08:00">2019-03-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 11:06:46" itemprop="dateModified" datetime="2019-05-06T11:06:46+08:00">2019-05-06</time>
               
             
           </span>
@@ -500,7 +512,7 @@
 <li>【推荐】方法的返回值可以为 null ，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回 null 值。<br> 说明：本手册明确防止 NPE 是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回null 的情况。</li>
 <li>【推荐】防止 NPE ，是程序员的基本修养，注意 NPE 产生的场景：<br>1） 返回类型为基本数据类型， return 包装数据类型的对象时，自动拆箱有可能产生 NPE 。<br>　　反例： public int f()  {  return Integer 对象}， 如果为 null ，自动解箱抛 NPE 。<br>2 ） 数据库的查询结果可能为 null 。<br>3 ） 集合里的元素即使 isNotEmpty ，取出的数据元素也可能为 null 。<br>4 ） 远程调用返回对象时，一律要求进行空指针判断，防止 NPE 。<br>5 ） 对于 Session 中获取的数据，建议 NPE 检查，避免空指针。<br>6 ） 级联调用 obj.getA().getB().getC()； 一连串调用，易产生 NPE 。<br>　　正例：使用 JDK8 的 Optional 类来防止 NPE 问题。</li>
 <li>【推荐】定义时区分 unchecked /  checked 异常，避免直接抛出 new RuntimeException() ，更不允许抛出 Exception 或者 Throwable ，应使用有业务含义的自定义异常。推荐业界已定义过的自定义异常，如： DAOException /  ServiceException 等。</li>
-<li>【参考】对于公司外的 http / api 开放接口必须使用“错误码” ； 而应用内部推荐异常抛出 ；<br>跨应用间 RPC 调用优先考虑使用 Result 方式，封装 isSuccess()方法 、“错误码”、“错误简<br>短信息”。<br>说明：关于 RPC 方法返回方式使用 Result 方式的理由：<br>1 ） 使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。<br>2 ） 如果不加栈信息，只是 new 自定义异常，加入自己的理解的 error message ，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题。</li>
+<li>【参考】对于公司外的 http / api 开放接口必须使用“错误码” ； 而应用内部推荐异常抛出；<br>跨应用间 RPC 调用优先考虑使用 Result 方式，封装 isSuccess()方法 、“错误码”、“错误简短信息”。<br>说明：关于 RPC 方法返回方式使用 Result 方式的理由：<br>1 ） 使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。<br>2 ） 如果不加栈信息，只是 new 自定义异常，加入自己的理解的 error message ，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题。</li>
 <li>【参考】避免出现重复的代码 （Don ’ t Repeat Yourself） ，即 DRY 原则。<br>说明：随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。<br>正例：一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkParam</span><span class="params">(DTO dto)</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -512,7 +524,7 @@
 </li>
 <li>【强制】应用中的扩展日志 （ 如打点、临时监控、访问日志等 ）<br> 命名方式：<br> appName_logType_logName.log 。<br> logType :日志类型，如 stats / monitor / access 等 ；logName :日志描述。<br> 这种命名的好处：<br> 通过文件名就可知道日志文件属于什么应用，什么类型，什么目的，也有利于归类查找。<br> 正例： mppserver 应用中单独监控时区转换异常，如：<br> mppserver _ monitor _ timeZoneConvert . log<br> 说明：推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，也便于通过日志对系统进行及时监控。</li>
 <li><p>【强制】对 trace / debug / info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。<br> 说明： </p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger . debug( <span class="string">" Processing trade with id : "</span> +  id + <span class="string">"  and symbol : "</span> +  symbol);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger.debug(<span class="string">"Processing trade with id:"</span> + id + <span class="string">"and symbol:"</span> +  symbol);</span><br></pre></td></tr></table></figure>
 <p> 如果日志级别是 warn ，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象，会执行 toString() 方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。<br> 正例：（ 条件 ）建设采用如下方式</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">    logger.debug(<span class="string">"Processing trade with id: "</span> + id + <span class="string">" and symbol: "</span> + symbol);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 正例：（ 占位符 ）</p>
@@ -521,8 +533,11 @@
 <li><p>【强制】避免重复打印日志，浪费磁盘空间，务必在 log 4 j . xml 中设置 additivityfalse 。<br> 正例： </p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.taobao.dubbo.config"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。<br> 正例： logger.error(各类参数或者对象 toString() + “_” + e.getMessage(), e);</p>
+<li><p>【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。<br> 正例： </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger.error(各类参数或者对象 toString() + <span class="string">"_"</span> + e.getMessage(), e);</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<ol start="7">
 <li>【推荐】谨慎地记录日志。生产环境禁止输出 debug日志；有选择地输出 info 日志 ；如果使用 warn 来记录刚上线时的业务行为信息，一定要注意日志输出量的问题，避免把服务器磁盘撑爆，并记得及时删除这些观察日志。<br> 说明：大量地输出无效日志，不利于系统性能提升，也不利于快速定位错误点。记录日志时请<br> 思考：这些日志真的有人看吗？看到这条日志你能做什么？能不能给问题排查带来好处？</li>
 <li>【推荐】可以使用 warn 日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。如非必要，请不要在此场景打出 error 级别，避免频繁报警。<br> 说明：注意日志输出的级别，error 级别只记录系统逻辑出错、异常或者重要的错误信息。</li>
 <li>【推荐】尽量用英文来描述日志错误信息，如果日志中的错误信息用英文描述不清楚的话使用中文描述即可，否则容易产生歧义。国际化团队或海外部署的服务器由于字符集问题，【强制】使用全英文来注释和描述日志错误信息。</li>
