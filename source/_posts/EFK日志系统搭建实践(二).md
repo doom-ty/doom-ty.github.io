@@ -84,3 +84,4 @@ output.logstash:
 
 ### 相关资料
 [Logstash过滤文章](https://blog.51cto.com/seekerwolf/2110174)
+[Docker中使用Logstash](https://www.elastic.co/guide/en/logstash/current/docker.html)
