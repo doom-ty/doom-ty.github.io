@@ -102,25 +102,27 @@
 
 
 
-  <meta name="description" content="推荐系统方式1：从0开始编写推荐系统优势：     可以更加透彻的了解推荐系统的实现方式，提高自身水平    劣势：    学习成本较高，具体体现在：    涉及相关专业数学知识和理论， 对自身的数学功底要求高(比如一些推荐算法模型和公式)，以及如何从自身业务抽象出数学模型等等，     开发周期特别长     方式2：借助已有的开源项目进行二次开发优势：    可以暂时跳过一些数学模型的设计以及">
-<meta name="keywords" content="推荐">
-<meta property="og:type" content="website">
-<meta property="og:title" content="推荐系统">
-<meta property="og:url" content="http://yoursite.com/remain/推荐系统.html">
+  <meta name="description" content="上一篇文章中，我们搭建了一套最简单的EFK系统。但是收集到的数据都是作为一个整体直接写入ES，这样不利于日志的管理、查询和分析。我们希望按照日志的格式来提取相关信息（时间、日志等级、产生日志的类信息等）格式化后再存入ES。所以在原有的基础上加入Logstash（与之前ES和Filebeat版本保持一致，这里使用的版本是6.6.1）来满足我们的这个需求。日志系统拓扑结构如下 一、搭建步骤1、Logs">
+<meta name="keywords" content="EFK,logstash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EFK日志系统搭建实践(二)">
+<meta property="og:url" content="http://yoursite.com/2019/03/06/EFK日志系统搭建实践(二)/index.html">
 <meta property="og:site_name" content="Doom-TY的博客">
-<meta property="og:description" content="推荐系统方式1：从0开始编写推荐系统优势：     可以更加透彻的了解推荐系统的实现方式，提高自身水平    劣势：    学习成本较高，具体体现在：    涉及相关专业数学知识和理论， 对自身的数学功底要求高(比如一些推荐算法模型和公式)，以及如何从自身业务抽象出数学模型等等，     开发周期特别长     方式2：借助已有的开源项目进行二次开发优势：    可以暂时跳过一些数学模型的设计以及">
+<meta property="og:description" content="上一篇文章中，我们搭建了一套最简单的EFK系统。但是收集到的数据都是作为一个整体直接写入ES，这样不利于日志的管理、查询和分析。我们希望按照日志的格式来提取相关信息（时间、日志等级、产生日志的类信息等）格式化后再存入ES。所以在原有的基础上加入Logstash（与之前ES和Filebeat版本保持一致，这里使用的版本是6.6.1）来满足我们的这个需求。日志系统拓扑结构如下 一、搭建步骤1、Logs">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-12T09:48:53.944Z">
+<meta property="og:image" content="http://yoursite.com/imgs/img-logstash-01.jpg">
+<meta property="og:updated_time" content="2019-05-06T02:20:32.920Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="推荐系统">
-<meta name="twitter:description" content="推荐系统方式1：从0开始编写推荐系统优势：     可以更加透彻的了解推荐系统的实现方式，提高自身水平    劣势：    学习成本较高，具体体现在：    涉及相关专业数学知识和理论， 对自身的数学功底要求高(比如一些推荐算法模型和公式)，以及如何从自身业务抽象出数学模型等等，     开发周期特别长     方式2：借助已有的开源项目进行二次开发优势：    可以暂时跳过一些数学模型的设计以及">
+<meta name="twitter:title" content="EFK日志系统搭建实践(二)">
+<meta name="twitter:description" content="上一篇文章中，我们搭建了一套最简单的EFK系统。但是收集到的数据都是作为一个整体直接写入ES，这样不利于日志的管理、查询和分析。我们希望按照日志的格式来提取相关信息（时间、日志等级、产生日志的类信息等）格式化后再存入ES。所以在原有的基础上加入Logstash（与之前ES和Filebeat版本保持一致，这里使用的版本是6.6.1）来满足我们的这个需求。日志系统拓扑结构如下 一、搭建步骤1、Logs">
+<meta name="twitter:image" content="http://yoursite.com/imgs/img-logstash-01.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/remain/推荐系统.html">
+  <link rel="canonical" href="http://yoursite.com/2019/03/06/EFK日志系统搭建实践(二)/">
 
 
 
@@ -130,7 +132,7 @@
   };
 </script>
 
-  <title>推荐系统 | Doom-TY的博客</title>
+  <title>EFK日志系统搭建实践(二) | Doom-TY的博客</title>
   
 
 
@@ -355,117 +357,214 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/EFK日志系统搭建实践(二)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="doom-ty">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17949809?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doom-TY的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">推荐系统
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h2><h3 id="方式1：从0开始编写推荐系统"><a href="#方式1：从0开始编写推荐系统" class="headerlink" title="方式1：从0开始编写推荐系统"></a>方式1：从0开始编写推荐系统</h3><p>优势：   </p>
-<ul>
-<li>可以更加透彻的了解推荐系统的实现方式，提高自身水平  </li>
-</ul>
-<p>劣势：  </p>
-<ul>
-<li><p>学习成本较高，<br>具体体现在：  </p>
-<ul>
-<li>涉及相关专业数学知识和理论，</li>
-<li>对自身的数学功底要求高(比如一些推荐算法模型和公式)，以及如何从自身业务抽象出数学模型等等，  </li>
-</ul>
-</li>
-<li><p>开发周期特别长  </p>
-</li>
-</ul>
-<h3 id="方式2：借助已有的开源项目进行二次开发"><a href="#方式2：借助已有的开源项目进行二次开发" class="headerlink" title="方式2：借助已有的开源项目进行二次开发"></a>方式2：借助已有的开源项目进行二次开发</h3><p>优势：  </p>
-<ul>
-<li>可以暂时跳过一些数学模型的设计以及偏理论的东西  </li>
-<li>开源项目已经实现了一些常用推荐算法、无需重复造轮子  </li>
-<li>有标准代码参考，方便后续二次开发     </li>
-</ul>
-<p>劣势：  </p>
-<ul>
-<li>推荐算法的核心部分没有参与到其中，没有清晰的概念和对实现方式一头雾水  </li>
-</ul>
-<p>解决方案：  </p>
-<ul>
-<li>虽然没有参与到算法的实现，但是可以看到源码  </li>
-<li>在了解一些基础知识以后可以尝试阅读算法的源码  </li>
-<li>在它们的基础上进行改造，逐渐形成适用于自身业务的推荐算法</li>
-</ul>
-<h2 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h2><p>就目前调研来看，推荐系统并不是独立的一个系统，它同样需要其他几个项目的支持（日志收集=》大数据分析）</p>
-<ol>
-<li>如何收集有效数据（数据埋点）  </li>
-<li>数据模型如何定义（建模）  </li>
-<li>开源的项目的推荐算法是否支持我们公司的当前业务范畴  </li>
-<li>推荐系统使用何种架构  </li>
-</ol>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
-<li><a href="https://www.jianshu.com/p/3ad6e87f3eec" target="_blank" rel="noopener">推荐系统干货</a>  </li>
-<li><a href="https://www.librec.net/dokuwiki/doku.php?id=index_zh" target="_blank" rel="noopener">java推荐算法开源工具库</a>  </li>
-<li><a href="http://www.cnblogs.com/kobedeshow/p/3569525.html?utm_source=tuicool" target="_blank" rel="noopener">推荐系统架构</a>  </li>
-<li><a href="https://www.biaodianfu.com/taobao-recommendation-system.html?utm_source=tuicool" target="_blank" rel="noopener">淘宝推荐系统</a></li>
-</ul>
+          <h1 class="post-title" itemprop="name headline">EFK日志系统搭建实践(二)
 
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-06 14:19:57" itemprop="dateCreated datePublished" datetime="2019-03-06T14:19:57+08:00">2019-03-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 10:20:32" itemprop="dateModified" datetime="2019-05-06T10:20:32+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/EFK/" itemprop="url" rel="index"><span itemprop="name">EFK</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>上一篇文章中，我们搭建了一套最简单的EFK系统。但是收集到的数据都是作为一个整体直接写入ES，这样不利于日志的管理、查询和分析。我们希望按照日志的格式来提取相关信息（时间、日志等级、产生日志的类信息等）格式化后再存入ES。所以在原有的基础上加入Logstash（与之前ES和Filebeat版本保持一致，这里使用的版本是6.6.1）来满足我们的这个需求。<br>日志系统拓扑结构如下<br><img src="/imgs/img-logstash-01.jpg" alt="拓扑图"></p>
+<h3 id="一、搭建步骤"><a href="#一、搭建步骤" class="headerlink" title="一、搭建步骤"></a>一、搭建步骤</h3><h4 id="1、Logstash安装"><a href="#1、Logstash安装" class="headerlink" title="1、Logstash安装"></a>1、Logstash安装</h4><p>下载<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/logstash/logstash-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>解压<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf logstash-6.6.1.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /config/logstash-sample.conf</span><br></pre></td></tr></table></figure></p>
+<p>将配置修改为如下格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Sample Logstash configuration for creating a simple</span><br><span class="line"># Beats -&gt; Logstash -&gt; Elasticsearch pipeline.</span><br><span class="line"></span><br><span class="line">input &#123;</span><br><span class="line">  beats &#123;</span><br><span class="line">    port =&gt; 5044</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">#grok的基本语法：key用“&lt;&gt;”包围，并在前面加上“?”，value则使用正则来表示，</span><br><span class="line">#grok在线调试http://grokdebug.herokuapp.com/，或者使用Kibana=》Dev Tools=》Grok Debugger</span><br><span class="line">filter &#123;</span><br><span class="line">    grok &#123;</span><br><span class="line">        match =&gt; &#123;</span><br><span class="line">            &quot;message&quot; =&gt; &quot;(?&lt;date&gt;\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;\s(?&lt;datetime&gt;%&#123;TIME&#125;))\s(?&lt;level&gt;[A-Z]&#123;4,&#125;)\s+(?&lt;class&gt;[A-Za-z0-9/.]&#123;4,&#125;)\s-\s(?&lt;msg&gt;.*)(\n(?&lt;moreInfo&gt;[\s\S]*))?&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        overwrite =&gt; [&quot;message&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;http://localhost:9200&quot;]</span><br><span class="line">    index =&gt; &quot;%&#123;[@metadata][beat]&#125;-%&#123;[@metadata][version]&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">    user =&gt; &quot;user&quot;</span><br><span class="line">    password =&gt; &quot;password&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述配置解析的日志格式如下(如有新日志格式，需要重新编写过滤表达式)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#格式一</span><br><span class="line">2019-03-12 14:31:05,545 INFO  com.njbd.jay.controller.System.ManagerController - 公钥模:10001</span><br><span class="line">#格式二</span><br><span class="line">2019-01-28 10:35:39,745 ERROR com.njbd.jay.exception.GlobalExceptionHandler - serverError:更新话题失败</span><br><span class="line">com.njbd.jay.exception.ServerRunTimeException: 更新话题失败</span><br><span class="line">	at com.njbd.jay.service.Impl.TopicServiceImpl.updateTopic(TopicServiceImpl.java:331) ~[classes/:na]</span><br><span class="line">	...</span><br><span class="line">#格式三</span><br><span class="line">2019-03-19 11:16:31,024 INFO  [InvoiceOrderCancelJob.java:52] com.njbd.jay.job.InvoiceOrderCancelJob - InvoiceOrderCancelJob.execute.finish</span><br></pre></td></tr></table></figure></p>
+<p>启动Logstash<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\bin\logstash -f .\config\logstash-sample.conf</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、修改Filebeat输出"><a href="#2、修改Filebeat输出" class="headerlink" title="2、修改Filebeat输出"></a>2、修改Filebeat输出</h4><p>将Filebeat输出修改到Logstash<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#----------------------------- Logstash output --------------------------------</span></span><br><span class="line"><span class="string">output.logstash:</span></span><br><span class="line">  <span class="comment"># The Logstash hosts</span></span><br><span class="line"><span class="attr">  hosts:</span> <span class="string">["localhost:5044"]</span></span><br></pre></td></tr></table></figure></p>
+<p>启动Filebeat</p>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://blog.51cto.com/seekerwolf/2110174" target="_blank" rel="noopener">Logstash过滤文章</a></p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/EFK/" rel="tag"># EFK</a>
+          
+            <a href="/tags/logstash/" rel="tag"># logstash</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/css笔记/" rel="next" title="css笔记">
+                <i class="fa fa-chevron-left"></i> css笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/06/EFK日志系统搭建实践(一)/" rel="prev" title="EFK日志系统搭建实践(一)">
+                EFK日志系统搭建实践(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -621,7 +720,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐系统"><span class="nav-number">1.</span> <span class="nav-text">推荐系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式1：从0开始编写推荐系统"><span class="nav-number">1.1.</span> <span class="nav-text">方式1：从0开始编写推荐系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式2：借助已有的开源项目进行二次开发"><span class="nav-number">1.2.</span> <span class="nav-text">方式2：借助已有的开源项目进行二次开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个问题"><span class="nav-number">2.</span> <span class="nav-text">几个问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关资料"><span class="nav-number">3.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、搭建步骤"><span class="nav-number">1.</span> <span class="nav-text">一、搭建步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Logstash安装"><span class="nav-number">1.1.</span> <span class="nav-text">1、Logstash安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、修改Filebeat输出"><span class="nav-number">1.2.</span> <span class="nav-text">2、修改Filebeat输出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关资料"><span class="nav-number">2.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
             
 
           </div>
