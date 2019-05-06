@@ -1,5 +1,5 @@
 ---
-title: EFK日志系统搭建实践
+title: EFK日志系统搭建实践(一)
 date: 2019-03-06 14:19:57
 tags:
     - EFK
@@ -122,7 +122,7 @@ kill -9 1234
    -Xms200m
    -XMX200m
    ```
-2. 最大文件描述太低
+2. 最大文件描述符太低
    ```
    max file descriptors [65535] for elasticsearch process is too low, increase to at least [65536]
    ```
@@ -258,6 +258,8 @@ vi filebeat.yml
 
 filebeat.inputs:
 - type: log
+  #如果是在windows上运行需要指定字符集，否则中文乱码
+  #encoding: GB2312
   enabled: false
   paths:
     - /var/log/*.log
