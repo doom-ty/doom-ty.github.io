@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Doom-TY的博客">
 <meta property="og:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-06T03:06:46.975Z">
+<meta property="og:updated_time" content="2019-05-06T03:14:31.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常处理及日志规范">
 <meta name="twitter:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 11:06:46" itemprop="dateModified" datetime="2019-05-06T11:06:46+08:00">2019-05-06</time>
+                <time title="修改时间：2019-05-06 11:14:31" itemprop="dateModified" datetime="2019-05-06T11:14:31+08:00">2019-05-06</time>
               
             
           </span>
@@ -493,7 +493,7 @@
 <li>【强制】不要在记录完日之后再次抛出异常，否则会记录两次错误信息<br>反例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;...&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">    log.err(<span class="string">"errorInfo &#123;&#125;"</span>, obj, e);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> MyException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>以下内容摘自《阿里巴巴java开发规范手册》</p>
+<p>以下内容摘自《阿里巴巴java开发规范手册》(建议通读)</p>
 <h5 id="（一）异常处理"><a href="#（一）异常处理" class="headerlink" title="（一）异常处理"></a>（一）异常处理</h5><ol>
 <li><p>【强制】Java 类库中定义的可以通过预检查方式规避的 RuntimeException 异常不应该通过catch 的方式来处理，比如： NullPointerException ， IndexOutOfBoundsException 等等。<br> 说明：无法通过预检查的异常除外，比如，在解析字符串形式的数字时，不得不通过 catchNumberFormatException 来实现。<br> 正例：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (obj != <span class="keyword">null</span>) &#123;...&#125;</span><br></pre></td></tr></table></figure>
@@ -542,6 +542,7 @@
 <li>【推荐】可以使用 warn 日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。如非必要，请不要在此场景打出 error 级别，避免频繁报警。<br> 说明：注意日志输出的级别，error 级别只记录系统逻辑出错、异常或者重要的错误信息。</li>
 <li>【推荐】尽量用英文来描述日志错误信息，如果日志中的错误信息用英文描述不清楚的话使用中文描述即可，否则容易产生歧义。国际化团队或海外部署的服务器由于字符集问题，【强制】使用全英文来注释和描述日志错误信息。</li>
 </ol>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://github.com/alibaba/p3c/blob/master/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E8%AF%A6%E5%B0%BD%E7%89%88%EF%BC%89.pdf" target="_blank" rel="noopener">阿里巴巴Java开发手册（详尽版）</a></p>
 
       
     </div>
@@ -767,7 +768,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、日志级别"><span class="nav-number">1.</span> <span class="nav-text">一、日志级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、规范详情"><span class="nav-number">2.</span> <span class="nav-text">二、规范详情</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（一）异常处理"><span class="nav-number">2.1.</span> <span class="nav-text">（一）异常处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-日志规约"><span class="nav-number">2.2.</span> <span class="nav-text">( 二 ) 日志规约</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、日志级别"><span class="nav-number">1.</span> <span class="nav-text">一、日志级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、规范详情"><span class="nav-number">2.</span> <span class="nav-text">二、规范详情</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（一）异常处理"><span class="nav-number">2.1.</span> <span class="nav-text">（一）异常处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-日志规约"><span class="nav-number">2.2.</span> <span class="nav-text">( 二 ) 日志规约</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#相关资料"><span class="nav-number"></span> <span class="nav-text">相关资料</span></a></li></div>
             
 
           </div>
