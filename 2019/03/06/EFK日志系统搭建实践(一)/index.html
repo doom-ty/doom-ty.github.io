@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/imgs/img-efk-01.jpg">
 <meta property="og:image" content="http://yoursite.com/imgs/img-kibana-01.jpg">
 <meta property="og:image" content="http://yoursite.com/imgs/img-kibana-02.jpg">
-<meta property="og:updated_time" content="2019-05-06T01:31:29.797Z">
+<meta property="og:updated_time" content="2019-05-06T02:41:25.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EFK日志系统搭建实践(一)">
 <meta name="twitter:description" content="一、什么是EFKEFK是ELK的变种，主要是将日志进行聚合，方便查询。EFK不是一个软件，而是一系列工具的组合(一种问题的解决方案)，来解决传统方式查询日志繁琐、低效的问题。">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 09:31:29" itemprop="dateModified" datetime="2019-05-06T09:31:29+08:00">2019-05-06</time>
+                <time title="修改时间：2019-05-06 10:41:25" itemprop="dateModified" datetime="2019-05-06T10:41:25+08:00">2019-05-06</time>
               
             
           </span>
@@ -588,7 +588,7 @@
 <h4 id="5-配置Kibana"><a href="#5-配置Kibana" class="headerlink" title="5. 配置Kibana"></a>5. 配置Kibana</h4><p>进入Kibana<br>localhost:5601<br>按下图顺序找到配置<br><img src="/imgs/img-kibana-01.jpg" alt="Kibana配置1"><br>我们可以看到Filebeat创建的索引格式为filebeat-x.x.x-yyyy.mm.dd<br>这里显示的为filebeat-6.6.1-2019.03.07<br>所以为了匹配这个索引，我们需要在上方输入框输入以下索引匹配格式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filebeat-6.6.1-*</span><br></pre></td></tr></table></figure></p>
 <p>点击Next Step进入下一步配置<br><img src="/imgs/img-kibana-02.jpg" alt="Kibana配置1"><br>这里我们选择@timestamp<br>点击Create index pattern，然后进入 Discover面板就能看到Filebeat收集到的日志数据了</p>
 <h4 id="6-Kibana安全"><a href="#6-Kibana安全" class="headerlink" title="6. Kibana安全"></a>6. Kibana安全</h4><p><a href="https://www.cnblogs.com/yjmyzz/p/filebeat-turorial-and-kibana-login-setting-with-nginx.html" target="_blank" rel="noopener">Ngnix实现Kibana安全认证</a><br><a href="https://www.cnblogs.com/cjsblog/p/9501858.html" target="_blank" rel="noopener">X-pack实现Kibana安全认证-收费</a></p>
-<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.elastic.co/cn/products" target="_blank" rel="noopener">ES、Filebeat、Kibana官网</a><br><a href="https://www.cnblogs.com/xing901022/p/4974977.html" target="_blank" rel="noopener">Kibana查询语法(Lucene语法)</a><br><a href="https://www.elastic.co/guide/en/kibana/6.6/index.html" target="_blank" rel="noopener">Kibana用户指南</a></p>
+<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://www.elastic.co/cn/products" target="_blank" rel="noopener">ES、Filebeat、Kibana官网</a><br><a href="https://www.cnblogs.com/xing901022/p/4974977.html" target="_blank" rel="noopener">Kibana查询语法(Lucene语法)</a><br><a href="https://www.elastic.co/guide/en/kibana/6.6/index.html" target="_blank" rel="noopener">Kibana用户指南</a><br><a href="https://www.elastic.co/guide/en/beats/filebeat/6.5/running-on-docker.html" target="_blank" rel="noopener">Docker中使用Filebeat</a><br><a href="https://www.elastic.co/guide/en/beats/filebeat/current/running-on-kubernetes.html" target="_blank" rel="noopener">K8s中使用Filebeat</a><br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">Docker中使用ES</a></p>
 
       
     </div>
