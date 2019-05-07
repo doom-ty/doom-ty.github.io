@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Doom-TY的博客">
 <meta property="og:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-06T03:14:31.196Z">
+<meta property="og:updated_time" content="2019-05-07T00:51:09.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常处理及日志规范">
 <meta name="twitter:description" content="一、日志级别. info：记录的重要信息. warn：警告信息. error：系统运行错误. debug：debug信息. trace：比debug更详细的跟踪信息一般开发中比较常用的为info、warn和error">
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 11:14:31" itemprop="dateModified" datetime="2019-05-06T11:14:31+08:00">2019-05-06</time>
+                <time title="修改时间：2019-05-07 08:51:09" itemprop="dateModified" datetime="2019-05-07T08:51:09+08:00">2019-05-07</time>
               
             
           </span>
@@ -530,7 +530,7 @@
 <p> 正例：（ 占位符 ）</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger.debug(<span class="string">"Processing trade with id: &#123;&#125; and symbol : &#123;&#125; "</span>, id, symbol);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>【强制】避免重复打印日志，浪费磁盘空间，务必在 log 4 j . xml 中设置 additivityfalse 。<br> 正例： </p>
+<li><p>【强制】避免重复打印日志，浪费磁盘空间，务必在 log4j.xml 中设置 additivity=false 。<br> 正例： </p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.taobao.dubbo.config"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>【强制】异常信息应该包括两类信息：案发现场信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。<br> 正例： </p>
